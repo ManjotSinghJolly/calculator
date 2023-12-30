@@ -1,78 +1,91 @@
 //Addition function
 function add(num1, num2) {
-  let sum = num1 + num2;
-  console.log(sum);
+  return num1 + num2;
 }
-
-// add(5, 5); //10
 
 //Subtraction function
 function subtract(num1, num2) {
-  let diff = num1 - num2;
-  console.log(diff);
+  return num1 - num2;
 }
-// subtract(5, 5); //0
 
 //Multiplication function
 function multiply(num1, num2) {
-  let prod = num1 * num2;
-  console.log(prod);
+  return num1 * num2;
 }
-// multiply(5, 5); //25
 
 //Division function
 function divide(num1, num2) {
-  let ans = num1 / num2;
-  console.log(ans);
+  return num1 / num2;
 }
-// divide(5, 5); //1
 
-// let firstNumber = prompt("Enter the first number: ");
-// firstNumber = Number(firstNumber);
-// let secondNumber = prompt("Enter the second number: ");
-// secondNumber = Number(secondNumber);
-// let operator = prompt("Enter your operator: ");
+function operate(operator, num1, num2) {
+  if (operator === "+") {
+    return add(num1, num2);
+  } else if (operator === "-") {
+    return subtract(num1, num2);
+  } else if (operator === "*") {
+    return multiply(num1, num2);
+  } else if (operator === "/") {
+    return divide(num1, num2);
+  } else {
+    alert("Please enter a valid operator.");
+    return null;
+  }
+}
 
-// function operate(operator, num1, num2) {
-//   if (operator === "+") {
-//     add(num1, num2);
-//   } else if (operator === "-") {
-//     subtract(num1, num2);
-//   } else if (operator === "*") {
-//     multiply(num1, num2);
-//   } else if (operator === "/") {
-//     divide(num1, num2);
-//   } else {
-//     alert("Please enter a valid operator.");
-//   }
-// }
-
-// operate(operator, firstNumber, secondNumber);
-
-//selecting the update display button
-// const updateDisplay = document.getElementById("display-button");
-// const calcDisplay = document.getElementById("display");
-// updateDisplay.addEventListener("click", function () {
-//   calcDisplay.innerHTML = "Display Updated!";
-//   console.log("The update display button was clicked!");
-// });
-
-//Selecting the calculator display
+//Selecting the lower calculator display
 const calcDisplay = document.getElementById("display");
-// function updateDisplay() {
-//   calcDisplay.innerHTML = "okay";
-// }
+let displayContent = "";
+//Selecting the upper calculator display
 
+//Function to update the lower display
 function updateDisplay(value) {
-  calcDisplay.append(value);
+  displayContent += value;
+  calcDisplay.textContent = displayContent;
 }
 
-const numberButtons = document.querySelectorAll("button");
+// Click Functionality for the Number Buttons
+let buttonValue;
+
+const numberButtons = document.querySelectorAll(".number-button");
 //Adding event listener to each button
 numberButtons.forEach(function (numberButton) {
   numberButton.addEventListener("click", function () {
     //Checking which button was clicked and storing the value in the variable
-    var buttonValue = numberButton.getAttribute("data-value");
+    buttonValue = numberButton.getAttribute("data-value");
+
     updateDisplay(buttonValue);
   });
+});
+
+const secondTime = document.querySelectorAll(".number-button");
+
+//Click Functionality for the Operator Buttons
+const operatorButtons = document.querySelectorAll(".operator-button");
+//Adding event listener to each button
+operatorButtons.forEach(function (operatorButton) {
+  operatorButton.addEventListener("click", function () {
+    let operatorValue = operatorButton.getAttribute("data-value");
+    updateDisplay(operatorValue);
+  });
+});
+
+//Click functionality for the equal to button
+const compute = document.getElementById("equals-to");
+compute.addEventListener("click", function () {
+  //Spliting the input string based on the oparator
+  const numbers = displayContent.split(/\+|\-|\*|\//);
+
+  //Extractng the operator
+  const operator = displayContent.match(/\+|\-|\*|\//);
+  // console.log(typeof operator);
+
+  if (operator) {
+    const firstNumber = parseFloat(numbers[0]);
+    const secondNumber = parseFloat(numbers[1]);
+
+    const ans = operate(...operator, firstNumber, secondNumber);
+
+    calcDisplay.innerHTML = ans;
+  }
 });
