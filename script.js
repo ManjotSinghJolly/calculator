@@ -1,3 +1,12 @@
+let firstNumber = "";
+let secondNumber = "";
+let operatorValue = "";
+let previousNumber = 0;
+let upperDisplayString = "";
+let ans;
+let displayContent = "";
+let result;
+
 //Addition function
 function add(num1, num2) {
   return num1 + num2;
@@ -34,14 +43,17 @@ function operate(operator, num1, num2) {
 }
 
 //Selecting the lower calculator display
-const calcDisplay = document.getElementById("display");
-let displayContent = "";
+const lowerDisplay = document.getElementById("lower-display");
+const upperDisplay = document.getElementById("upper-display");
+
 //Selecting the upper calculator display
+function updateUpperDisplay() {}
 
 //Function to update the lower display
 function updateDisplay(value) {
   displayContent += value;
-  calcDisplay.textContent = displayContent;
+
+  lowerDisplay.textContent = displayContent;
 }
 
 // Click Functionality for the Number Buttons
@@ -53,39 +65,64 @@ numberButtons.forEach(function (numberButton) {
   numberButton.addEventListener("click", function () {
     //Checking which button was clicked and storing the value in the variable
     buttonValue = numberButton.getAttribute("data-value");
-
     updateDisplay(buttonValue);
   });
 });
-
-const secondTime = document.querySelectorAll(".number-button");
 
 //Click Functionality for the Operator Buttons
 const operatorButtons = document.querySelectorAll(".operator-button");
 //Adding event listener to each button
 operatorButtons.forEach(function (operatorButton) {
   operatorButton.addEventListener("click", function () {
-    let operatorValue = operatorButton.getAttribute("data-value");
-    updateDisplay(operatorValue);
+    operatorValue = operatorButton.getAttribute("data-value");
+    // displayContent = "";
+
+    if (ans && operatorValue) {
+      firstNumber = ans;
+      // ans = String(ans);
+      ans = 0;
+      displayContent = "";
+
+      // console.log(firstNumber);
+      // console.log(secondNumber);
+      // console.log(ans);
+      // console.log(typeof firstNumber);
+      // console.log(typeof secondNumber);
+      // console.log(typeof ans);
+      // console.log("The displayContent is: " + displayContent);
+
+      // ans = "";
+      // secondNumber = 0;
+      // ans = String(ans);
+      // secondNumber = String(secondNumber);
+      // secondNumber = "";
+
+      // secondNumber = 0;
+      // ans = 0;
+      // lowerDisplay.textContent = "";
+    } else {
+      firstNumber = displayContent;
+      // firstNumber = Number(firstNumber);
+      displayContent = "";
+
+      // firstNumber = Number(firstNumber) + previousNumber;
+    }
+    firstNumber = Number(firstNumber);
+    upperDisplay.textContent = `${firstNumber} ${operatorValue}`;
+    // console.log(firstNumber);
+    // updateDisplay(operatorValue);
   });
 });
 
 //Click functionality for the equal to button
 const compute = document.getElementById("equals-to");
 compute.addEventListener("click", function () {
-  //Spliting the input string based on the oparator
-  const numbers = displayContent.split(/\+|\-|\*|\//);
+  secondNumber = displayContent;
+  secondNumber = Number(secondNumber);
+  upperDisplay.textContent = `${firstNumber} ${operatorValue} ${secondNumber} =`;
+  ans = operate(operatorValue, firstNumber, secondNumber);
 
-  //Extractng the operator
-  const operator = displayContent.match(/\+|\-|\*|\//);
-  // console.log(typeof operator);
-
-  if (operator) {
-    const firstNumber = parseFloat(numbers[0]);
-    const secondNumber = parseFloat(numbers[1]);
-
-    const ans = operate(...operator, firstNumber, secondNumber);
-
-    calcDisplay.innerHTML = ans;
-  }
+  lowerDisplay.textContent = ans;
+  secondNumber = String(secondNumber);
+  secondNumber = "";
 });
