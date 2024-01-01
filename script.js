@@ -6,6 +6,7 @@ let upperDisplayString = "";
 let ans;
 let displayContent = "";
 let result;
+let finalResult;
 
 //Addition function
 function add(num1, num2) {
@@ -27,6 +28,7 @@ function divide(num1, num2) {
   return num1 / num2;
 }
 
+//The main operate function
 function operate(operator, num1, num2) {
   if (operator === "+") {
     return add(num1, num2);
@@ -39,6 +41,65 @@ function operate(operator, num1, num2) {
   } else {
     alert("Please enter a valid operator.");
     return null;
+  }
+}
+
+// Function for solving two variable string expression
+function solveExpression(stringExpression) {
+  let resultString;
+  if (stringExpression[0] === "-") {
+    const firstSpaceAfterNegative = stringExpression.indexOf(
+      " ",
+      stringExpression.indexOf("-")
+    );
+
+    let firstNumber = stringExpression.slice(
+      stringExpression.indexOf("-") + 1,
+      firstSpaceAfterNegative
+    );
+    let sign = stringExpression[firstSpaceAfterNegative + 1];
+
+    let secondNumber = stringExpression.slice(firstSpaceAfterNegative + 3);
+    firstNumber = Number(firstNumber);
+    secondNumber = Number(secondNumber);
+    console.log(firstNumber);
+    console.log(typeof firstNumber);
+    console.log(secondNumber);
+    console.log(typeof secondNumber);
+    console.log(sign);
+    console.log(typeof sign);
+
+    if (sign === "+") {
+      resultString = firstNumber - secondNumber;
+      resultString = String(resultString);
+      resultString = "-" + resultString;
+    } else if (sign === "-") {
+      resultString = firstNumber + secondNumber;
+      resultString = String(resultString);
+      resultString = "-" + resultString;
+    } else if (sign == "*") {
+      resultString = multiply(firstNumber, secondNumber);
+      resultString = String(resultString);
+      resultString = "-" + resultString;
+    } else {
+      resultString = divide(firstNumber, secondNumber);
+      resultString = String(resultString);
+      resultString = "-" + resultString;
+    }
+
+    return resultString;
+  } else {
+    const numbers = stringExpression.split(/\+|\-|\*|\//);
+    const operator = stringExpression.match(/\+|\-|\*|\//);
+    if (numbers.length == 2 && operator) {
+      const num1 = parseFloat(numbers[0]);
+      const num2 = parseFloat(numbers[1]);
+
+      resultString = operate(...operator, num1, num2);
+      return resultString;
+    } else {
+      console.log("Invalid Input!");
+    }
   }
 }
 
@@ -100,6 +161,17 @@ operatorButtons.forEach(function (operatorButton) {
       // secondNumber = 0;
       // ans = 0;
       // lowerDisplay.textContent = "";
+    } else if (firstNumber && operatorValue) {
+      console.log(upperDisplay.textContent);
+      console.log(displayContent);
+      const expression = upperDisplay.textContent + " " + displayContent;
+      console.log(expression);
+      finalResult = solveExpression(expression);
+      upperDisplay.textContent = `${finalResult} ${operatorValue}`;
+      finalResult = String(finalResult);
+
+      console.log("the final result is: " + finalResult);
+      console.log("the type of final result is: " + typeof finalResult);
     } else {
       firstNumber = displayContent;
       // firstNumber = Number(firstNumber);
