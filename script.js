@@ -76,7 +76,7 @@ function solveExpression(stringExpression) {
         resultString = "-" + resultString;
       } else {
         resultString = firstNumber - secondNumber;
-        resultString = String(firstNumber);
+        resultString = String(resultString);
       }
     } else if (sign === "-") {
       resultString = firstNumber + secondNumber;
@@ -172,6 +172,7 @@ operatorButtons.forEach(function (operatorButton) {
       const expression = upperDisplay.textContent + " " + displayContent;
       console.log(expression);
       finalResult = solveExpression(expression);
+      console.log(typeof finalResult);
 
       finalResult = String(finalResult);
       firstNumber = finalResult;
@@ -203,6 +204,10 @@ compute.addEventListener("click", function () {
   secondNumber = Number(secondNumber);
   upperDisplay.textContent = `${firstNumber} ${operatorValue} ${secondNumber} =`;
   ans = operate(operatorValue, firstNumber, secondNumber);
+
+  //Applying toFixed function to the obtained answer
+  ans = parseFloat(ans.toFixed(9));
+  console.log(typeof ans);
 
   lowerDisplay.textContent = ans;
   secondNumber = String(secondNumber);
