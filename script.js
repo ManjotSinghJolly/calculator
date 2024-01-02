@@ -70,9 +70,14 @@ function solveExpression(stringExpression) {
     console.log(typeof sign);
 
     if (sign === "+") {
-      resultString = firstNumber - secondNumber;
-      resultString = String(resultString);
-      resultString = "-" + resultString;
+      if (firstNumber > secondNumber) {
+        resultString = firstNumber - secondNumber;
+        resultString = String(resultString);
+        resultString = "-" + resultString;
+      } else {
+        resultString = firstNumber - secondNumber;
+        resultString = String(firstNumber);
+      }
     } else if (sign === "-") {
       resultString = firstNumber + secondNumber;
       resultString = String(resultString);
@@ -167,8 +172,13 @@ operatorButtons.forEach(function (operatorButton) {
       const expression = upperDisplay.textContent + " " + displayContent;
       console.log(expression);
       finalResult = solveExpression(expression);
-      upperDisplay.textContent = `${finalResult} ${operatorValue}`;
+
       finalResult = String(finalResult);
+      firstNumber = finalResult;
+      displayContent = "";
+      updateDisplay(firstNumber);
+      upperDisplay.textContent = `${firstNumber} ${operatorValue}`;
+      displayContent = "";
 
       console.log("the final result is: " + finalResult);
       console.log("the type of final result is: " + typeof finalResult);
