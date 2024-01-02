@@ -74,6 +74,9 @@ function solveExpression(stringExpression) {
         resultString = firstNumber - secondNumber;
         resultString = String(resultString);
         resultString = "-" + resultString;
+      } else if (firstNumber < secondNumber) {
+        resultString = secondNumber - firstNumber;
+        resultString = String(resultString);
       } else {
         resultString = firstNumber - secondNumber;
         resultString = String(resultString);
