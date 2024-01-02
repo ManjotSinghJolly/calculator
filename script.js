@@ -74,25 +74,29 @@ function solveExpression(stringExpression) {
         resultString = firstNumber - secondNumber;
         resultString = String(resultString);
         resultString = "-" + resultString;
+        resultString = Number(resultString);
       } else if (firstNumber < secondNumber) {
         resultString = secondNumber - firstNumber;
-        resultString = String(resultString);
+        resultString = Number(resultString);
       } else {
         resultString = firstNumber - secondNumber;
-        resultString = String(resultString);
+        resultString = Number(resultString);
       }
     } else if (sign === "-") {
       resultString = firstNumber + secondNumber;
       resultString = String(resultString);
       resultString = "-" + resultString;
+      resultString = Number(resultString);
     } else if (sign == "*") {
       resultString = multiply(firstNumber, secondNumber);
       resultString = String(resultString);
       resultString = "-" + resultString;
+      resultString = Number(resultString);
     } else {
       resultString = divide(firstNumber, secondNumber);
       resultString = String(resultString);
       resultString = "-" + resultString;
+      resultString = Number(resultString);
     }
 
     return resultString;
@@ -104,6 +108,8 @@ function solveExpression(stringExpression) {
       const num2 = parseFloat(numbers[1]);
 
       resultString = operate(...operator, num1, num2);
+      resultString = Number(resultString);
+
       return resultString;
     } else {
       console.log("Invalid Input!");
@@ -169,13 +175,20 @@ operatorButtons.forEach(function (operatorButton) {
       // secondNumber = 0;
       // ans = 0;
       // lowerDisplay.textContent = "";
-    } else if (firstNumber && operatorValue) {
+    } else if (
+      (firstNumber && operatorValue) ||
+      (firstNumber === 0 && operatorValue)
+    ) {
       console.log(upperDisplay.textContent);
       console.log(displayContent);
       const expression = upperDisplay.textContent + " " + displayContent;
       console.log(expression);
+      // console.log(
+      //   "The type of the expression this time is: " + typeof expression
+      // );
       finalResult = solveExpression(expression);
-      console.log(typeof finalResult);
+      // Rounding off the answer obtained on performing the operation
+      finalResult = parseFloat(finalResult.toFixed(9));
 
       finalResult = String(finalResult);
       firstNumber = finalResult;
