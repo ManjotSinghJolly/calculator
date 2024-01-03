@@ -121,9 +121,6 @@ function solveExpression(stringExpression) {
 const lowerDisplay = document.getElementById("lower-display");
 const upperDisplay = document.getElementById("upper-display");
 
-//Selecting the upper calculator display
-function updateUpperDisplay() {}
-
 //Function to update the lower display
 function updateDisplay(value) {
   displayContent += value;
