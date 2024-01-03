@@ -7,6 +7,7 @@ let ans;
 let displayContent = "";
 let result;
 let finalResult;
+let decimalUsed = false;
 
 //Addition function
 function add(num1, num2) {
@@ -130,7 +131,6 @@ function updateDisplay(value) {
 
 // Click Functionality for the Number Buttons
 let buttonValue;
-
 const numberButtons = document.querySelectorAll(".number-button");
 //Adding event listener to each button
 numberButtons.forEach(function (numberButton) {
@@ -147,6 +147,7 @@ const operatorButtons = document.querySelectorAll(".operator-button");
 operatorButtons.forEach(function (operatorButton) {
   operatorButton.addEventListener("click", function () {
     operatorValue = operatorButton.getAttribute("data-value");
+    decimalUsed = false;
     // displayContent = "";
 
     if (ans && operatorValue) {
@@ -213,6 +214,7 @@ operatorButtons.forEach(function (operatorButton) {
 //Click functionality for the equal to button
 const compute = document.getElementById("equals-to");
 compute.addEventListener("click", function () {
+  decimalUsed = false;
   secondNumber = displayContent;
   secondNumber = Number(secondNumber);
   upperDisplay.textContent = `${firstNumber} ${operatorValue} ${secondNumber} =`;
@@ -225,4 +227,13 @@ compute.addEventListener("click", function () {
   lowerDisplay.textContent = ans;
   secondNumber = String(secondNumber);
   secondNumber = "";
+});
+
+// Functionality for the decimal-point
+const decimal = document.getElementById("decimal-point");
+decimal.addEventListener("click", function () {
+  if (decimalUsed == false) {
+    updateDisplay(".");
+    decimalUsed = true;
+  }
 });
