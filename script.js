@@ -1,11 +1,10 @@
 let firstNumber = "";
 let secondNumber = "";
 let operatorValue = "";
-let previousNumber = 0;
-let upperDisplayString = "";
+
 let ans;
 let displayContent = "";
-let result;
+
 let finalResult;
 let decimalUsed = false;
 
@@ -137,6 +136,7 @@ numberButtons.forEach(function (numberButton) {
   numberButton.addEventListener("click", function () {
     //Checking which button was clicked and storing the value in the variable
     buttonValue = numberButton.getAttribute("data-value");
+    console.log(typeof buttonValue);
     updateDisplay(buttonValue);
   });
 });
@@ -155,6 +155,9 @@ operatorButtons.forEach(function (operatorButton) {
       // ans = String(ans);
       ans = 0;
       displayContent = "";
+      console.log(typeof firstNumber);
+      console.log(typeof secondNumber);
+      console.log(typeof ans);
 
       // console.log(firstNumber);
       // console.log(secondNumber);
@@ -199,6 +202,7 @@ operatorButtons.forEach(function (operatorButton) {
       console.log("the type of final result is: " + typeof finalResult);
     } else {
       firstNumber = displayContent;
+      console.log(typeof firstNumber);
       // firstNumber = Number(firstNumber);
       displayContent = "";
 
@@ -236,4 +240,18 @@ decimal.addEventListener("click", function () {
     updateDisplay(".");
     decimalUsed = true;
   }
+});
+
+//Functionality for the AC button
+const allClear = document.getElementById("all-clear");
+allClear.addEventListener("click", function () {
+  displayContent = "";
+  firstNumber = "";
+  secondNumber = "";
+  operatorValue = "";
+  ans = 0;
+  finalResult = undefined;
+  decimalUsed = false;
+  lowerDisplay.textContent = "0";
+  upperDisplay.textContent = "";
 });
