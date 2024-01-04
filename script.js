@@ -136,7 +136,7 @@ numberButtons.forEach(function (numberButton) {
   numberButton.addEventListener("click", function () {
     //Checking which button was clicked and storing the value in the variable
     buttonValue = numberButton.getAttribute("data-value");
-    console.log(typeof buttonValue);
+
     updateDisplay(buttonValue);
   });
 });
@@ -202,13 +202,14 @@ operatorButtons.forEach(function (operatorButton) {
       console.log("the type of final result is: " + typeof finalResult);
     } else {
       firstNumber = displayContent;
+      firstNumber = Number(firstNumber);
       console.log(typeof firstNumber);
-      // firstNumber = Number(firstNumber);
+
       displayContent = "";
 
       // firstNumber = Number(firstNumber) + previousNumber;
     }
-    firstNumber = Number(firstNumber);
+    // firstNumber = Number(firstNumber);
     upperDisplay.textContent = `${firstNumber} ${operatorValue}`;
     // console.log(firstNumber);
     // updateDisplay(operatorValue);
@@ -247,6 +248,7 @@ const allClear = document.getElementById("all-clear");
 allClear.addEventListener("click", function () {
   displayContent = "";
   firstNumber = "";
+  console.log("The type of firstNumber now is: " + typeof firstNumber);
   secondNumber = "";
   operatorValue = "";
   ans = 0;
