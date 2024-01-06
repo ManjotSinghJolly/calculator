@@ -10,6 +10,8 @@ let decimalUsed = false;
 
 let backspaceEnabled = true;
 
+let operatorUsed = false;
+
 //Addition function
 function add(num1, num2) {
   return num1 + num2;
@@ -140,6 +142,7 @@ numberButtons.forEach(function (numberButton) {
     buttonValue = numberButton.getAttribute("data-value");
 
     updateDisplay(buttonValue);
+    operatorUsed = false;
   });
 });
 
@@ -148,72 +151,76 @@ const operatorButtons = document.querySelectorAll(".operator-button");
 //Adding event listener to each button
 operatorButtons.forEach(function (operatorButton) {
   operatorButton.addEventListener("click", function () {
-    operatorValue = operatorButton.getAttribute("data-value");
-    decimalUsed = false;
-    // displayContent = "";
+    if (operatorUsed == false) {
+      operatorValue = operatorButton.getAttribute("data-value");
+      decimalUsed = false;
 
-    if (ans && operatorValue) {
-      backspaceEnabled = true;
-      firstNumber = ans;
-      // ans = String(ans);
-      ans = 0;
-      displayContent = "";
-      console.log(typeof firstNumber);
-      console.log(typeof secondNumber);
-      console.log(typeof ans);
+      // displayContent = "";
 
-      // console.log(firstNumber);
-      // console.log(secondNumber);
-      // console.log(ans);
-      // console.log(typeof firstNumber);
-      // console.log(typeof secondNumber);
-      // console.log(typeof ans);
-      // console.log("The displayContent is: " + displayContent);
+      if (ans && operatorValue) {
+        backspaceEnabled = true;
+        firstNumber = ans;
+        // ans = String(ans);
+        ans = 0;
+        displayContent = "";
+        console.log(typeof firstNumber);
+        console.log(typeof secondNumber);
+        console.log(typeof ans);
 
-      // ans = "";
-      // secondNumber = 0;
-      // ans = String(ans);
-      // secondNumber = String(secondNumber);
-      // secondNumber = "";
+        // console.log(firstNumber);
+        // console.log(secondNumber);
+        // console.log(ans);
+        // console.log(typeof firstNumber);
+        // console.log(typeof secondNumber);
+        // console.log(typeof ans);
+        // console.log("The displayContent is: " + displayContent);
 
-      // secondNumber = 0;
-      // ans = 0;
-      // lowerDisplay.textContent = "";
-    } else if (
-      (firstNumber && operatorValue) ||
-      (firstNumber === 0 && operatorValue)
-    ) {
-      console.log(upperDisplay.textContent);
-      console.log(displayContent);
-      const expression = upperDisplay.textContent + " " + displayContent;
-      console.log(expression);
-      // console.log(
-      //   "The type of the expression this time is: " + typeof expression
-      // );
-      finalResult = solveExpression(expression);
-      // Rounding off the answer obtained on performing the operation
-      finalResult = parseFloat(finalResult.toFixed(9));
+        // ans = "";
+        // secondNumber = 0;
+        // ans = String(ans);
+        // secondNumber = String(secondNumber);
+        // secondNumber = "";
 
-      finalResult = String(finalResult);
-      firstNumber = finalResult;
-      displayContent = "";
-      updateDisplay(firstNumber);
+        // secondNumber = 0;
+        // ans = 0;
+        // lowerDisplay.textContent = "";
+      } else if (
+        (firstNumber && operatorValue) ||
+        (firstNumber === 0 && operatorValue)
+      ) {
+        console.log(upperDisplay.textContent);
+        console.log(displayContent);
+        const expression = upperDisplay.textContent + " " + displayContent;
+        console.log(expression);
+        // console.log(
+        //   "The type of the expression this time is: " + typeof expression
+        // );
+        finalResult = solveExpression(expression);
+        // Rounding off the answer obtained on performing the operation
+        finalResult = parseFloat(finalResult.toFixed(9));
+
+        finalResult = String(finalResult);
+        firstNumber = finalResult;
+        displayContent = "";
+        updateDisplay(firstNumber);
+        upperDisplay.textContent = `${firstNumber} ${operatorValue}`;
+        displayContent = "";
+
+        console.log("the final result is: " + finalResult);
+        console.log("the type of final result is: " + typeof finalResult);
+      } else {
+        firstNumber = displayContent;
+        firstNumber = Number(firstNumber);
+        console.log(typeof firstNumber);
+
+        displayContent = "";
+
+        // firstNumber = Number(firstNumber) + previousNumber;
+      }
+      // firstNumber = Number(firstNumber);
       upperDisplay.textContent = `${firstNumber} ${operatorValue}`;
-      displayContent = "";
-
-      console.log("the final result is: " + finalResult);
-      console.log("the type of final result is: " + typeof finalResult);
-    } else {
-      firstNumber = displayContent;
-      firstNumber = Number(firstNumber);
-      console.log(typeof firstNumber);
-
-      displayContent = "";
-
-      // firstNumber = Number(firstNumber) + previousNumber;
+      operatorUsed = true;
     }
-    // firstNumber = Number(firstNumber);
-    upperDisplay.textContent = `${firstNumber} ${operatorValue}`;
     // console.log(firstNumber);
     // updateDisplay(operatorValue);
   });
@@ -222,6 +229,8 @@ operatorButtons.forEach(function (operatorButton) {
 //Click functionality for the equal to button
 const compute = document.getElementById("equals-to");
 compute.addEventListener("click", function () {
+  operatorUsed = false;
+
   decimalUsed = false;
   secondNumber = displayContent;
   secondNumber = Number(secondNumber);
