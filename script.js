@@ -8,6 +8,8 @@ let displayContent = "";
 let finalResult;
 let decimalUsed = false;
 
+let backspaceEnabled = true;
+
 //Addition function
 function add(num1, num2) {
   return num1 + num2;
@@ -151,6 +153,7 @@ operatorButtons.forEach(function (operatorButton) {
     // displayContent = "";
 
     if (ans && operatorValue) {
+      backspaceEnabled = true;
       firstNumber = ans;
       // ans = String(ans);
       ans = 0;
@@ -232,6 +235,9 @@ compute.addEventListener("click", function () {
   lowerDisplay.textContent = ans;
   secondNumber = String(secondNumber);
   secondNumber = "";
+
+  // Disabling the backspace button
+  backspaceEnabled = false;
 });
 
 // Functionality for the decimal-point
@@ -256,4 +262,19 @@ allClear.addEventListener("click", function () {
   decimalUsed = false;
   lowerDisplay.textContent = "0";
   upperDisplay.textContent = "";
+});
+
+// Functionality for the Backspace button
+const backspace = document.getElementById("backspace");
+backspace.addEventListener("click", function () {
+  if (backspaceEnabled) {
+    stringLength = displayContent.length;
+    if (stringLength > 0) {
+      displayContent = displayContent.slice(0, stringLength - 1);
+      lowerDisplay.textContent = displayContent;
+
+      console.log("the displayLength at this instance is: " + stringLength);
+      console.log("the displaySring at this instance is: " + displayContent);
+    }
+  }
 });
