@@ -232,6 +232,13 @@ operatorButtons.forEach(function (operatorButton) {
   });
 });
 
+// Keyboard functionality for the operator buttons
+document.addEventListener("keydown", function (event) {
+  if (event.key === "-" || event.key === "/") {
+    operatorButtons.click();
+  }
+});
+
 //Click functionality for the equal to button
 const compute = document.getElementById("equals-to");
 compute.addEventListener("click", function () {
@@ -305,5 +312,12 @@ backspace.addEventListener("click", function () {
       console.log("the displayLength at this instance is: " + stringLength);
       console.log("the displaySring at this instance is: " + displayContent);
     }
+  }
+});
+
+//Keyboard functionality for the Backspace button
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Backspace") {
+    backspace.click();
   }
 });
