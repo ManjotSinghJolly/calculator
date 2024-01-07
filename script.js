@@ -255,19 +255,26 @@ compute.addEventListener("click", function () {
   backspaceEnabled = false;
 });
 
-// keyboard support for the equal to button
+// Keyboard support for the equal to button
 document.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     compute.click();
   }
 });
 
-// Functionality for the decimal-point
+// Click Functionality for the decimal-point
 const decimal = document.getElementById("decimal-point");
 decimal.addEventListener("click", function () {
   if (decimalUsed == false) {
     updateDisplay(".");
     decimalUsed = true;
+  }
+});
+
+// Keyboard support for the decimal-point
+document.addEventListener("keydown", function (event) {
+  if (event.key === ".") {
+    decimal.click();
   }
 });
 
