@@ -134,16 +134,40 @@ function updateDisplay(value) {
 
 // Click Functionality for the Number Buttons
 let buttonValue;
-const numberButtons = document.querySelectorAll(".number-button");
-//Adding event listener to each button
-numberButtons.forEach(function (numberButton) {
-  numberButton.addEventListener("click", function () {
-    //Checking which button was clicked and storing the value in the variable
-    buttonValue = numberButton.getAttribute("data-value");
 
-    updateDisplay(buttonValue);
-    operatorUsed = false;
-  });
+document.addEventListener("DOMContentLoaded", function () {
+  const lowerDisplay = document.getElementById("lower-display");
+
+  if (lowerDisplay) {
+    // Set initial focus on the lower display for keyboard interaction
+    lowerDisplay.tabIndex = 0; // Ensure the element is focusable
+    lowerDisplay.focus();
+
+    lowerDisplay.style.outline = "none";
+
+    // Enable click functionality for the number buttons
+    const numberButtons = document.querySelectorAll(".number-button");
+    numberButtons.forEach(function (numberButton) {
+      numberButton.addEventListener("click", function () {
+        const buttonValue = numberButton.getAttribute("data-value");
+        updateDisplay(buttonValue);
+        operatorUsed = false;
+        lowerDisplay.focus(); // Ensure focus is on the display after clicking
+      });
+    });
+
+    // Enable keyboard input for the lower display
+    lowerDisplay.addEventListener("keydown", function (event) {
+      const keyPressed = event.key;
+
+      // Check if the pressed key is a number (0-9)
+      if (/^[0-9]$/.test(keyPressed)) {
+        // Update the display with the pressed number
+        updateDisplay(keyPressed);
+        operatorUsed = false;
+      }
+    });
+  }
 });
 
 //Click Functionality for the Operator Buttons
@@ -155,35 +179,17 @@ operatorButtons.forEach(function (operatorButton) {
       operatorValue = operatorButton.getAttribute("data-value");
       decimalUsed = false;
 
-      // displayContent = "";
+      lowerDisplay.focus();
 
       if (ans && operatorValue) {
         backspaceEnabled = true;
         firstNumber = ans;
-        // ans = String(ans);
+
         ans = 0;
         displayContent = "";
         console.log(typeof firstNumber);
         console.log(typeof secondNumber);
         console.log(typeof ans);
-
-        // console.log(firstNumber);
-        // console.log(secondNumber);
-        // console.log(ans);
-        // console.log(typeof firstNumber);
-        // console.log(typeof secondNumber);
-        // console.log(typeof ans);
-        // console.log("The displayContent is: " + displayContent);
-
-        // ans = "";
-        // secondNumber = 0;
-        // ans = String(ans);
-        // secondNumber = String(secondNumber);
-        // secondNumber = "";
-
-        // secondNumber = 0;
-        // ans = 0;
-        // lowerDisplay.textContent = "";
       } else if (
         (firstNumber && operatorValue) ||
         (firstNumber === 0 && operatorValue)
