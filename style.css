@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+  font-weight: normal;
+}
+
+body {
+  background: linear-gradient(to right, #00aaff, #00ff6c);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* #calculator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+#calculator-body {
+  /* border: 1px solid black; */
+  width: 350px;
+  height: 550px;
+}
+
+#main-display {
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+#main-display #upper-display {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.5rem;
+}
+
+#main-display #lower-display {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+button {
+  cursor: pointer;
+  font-size: 2rem;
+  border: 1px solid white;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.75);
+  width: 87.5px;
+  height: 97.5px;
+
+  /* flex-grow: 1;
+  flex-basis: 0; */
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#all-clear,
+#backspace {
+  width: 175px;
+  height: 60px;
+}
+
+footer {
+  font-size: 20px;
+  color: black;
+  position: fixed;
+  bottom: 0;
+  margin: 5px;
+}
