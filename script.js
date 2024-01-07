@@ -12,6 +12,8 @@ let backspaceEnabled = true;
 
 let operatorUsed = false;
 
+let operatorButton;
+
 //Addition function
 function add(num1, num2) {
   return num1 + num2;
@@ -230,12 +232,21 @@ operatorButtons.forEach(function (operatorButton) {
     // console.log(firstNumber);
     // updateDisplay(operatorValue);
   });
+  // Keyboard functionality for the operator buttons
 });
 
-// Keyboard functionality for the operator buttons
 document.addEventListener("keydown", function (event) {
-  if (event.key === "-" || event.key === "/") {
-    operatorButtons.click();
+  // Check if the pressed key is an operator
+  if (/^[+\-*/]$/.test(event.key)) {
+    // Select the corresponding operator button using data-value attribute
+    const operatorButton = document.querySelector(
+      `[data-value="${event.key}"]`
+    );
+
+    // Check if operatorButton is found before clicking
+    if (operatorButton) {
+      operatorButton.click();
+    }
   }
 });
 
