@@ -309,6 +309,7 @@ allClear.addEventListener("click", function () {
   decimalUsed = false;
   lowerDisplay.textContent = "0";
   upperDisplay.textContent = "";
+  lowerDisplay.focus();
 });
 
 // Functionality for the Backspace button
