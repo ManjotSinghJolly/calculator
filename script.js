@@ -68,12 +68,6 @@ function solveExpression(stringExpression) {
     let secondNumber = stringExpression.slice(firstSpaceAfterNegative + 3);
     firstNumber = Number(firstNumber);
     secondNumber = Number(secondNumber);
-    console.log(firstNumber);
-    console.log(typeof firstNumber);
-    console.log(secondNumber);
-    console.log(typeof secondNumber);
-    console.log(sign);
-    console.log(typeof sign);
 
     if (sign === "+") {
       if (firstNumber > secondNumber) {
@@ -189,20 +183,12 @@ operatorButtons.forEach(function (operatorButton) {
 
         ans = 0;
         displayContent = "";
-        console.log(typeof firstNumber);
-        console.log(typeof secondNumber);
-        console.log(typeof ans);
       } else if (
         (firstNumber && operatorValue) ||
         (firstNumber === 0 && operatorValue)
       ) {
-        console.log(upperDisplay.textContent);
-        console.log(displayContent);
         const expression = upperDisplay.textContent + " " + displayContent;
-        console.log(expression);
-        // console.log(
-        //   "The type of the expression this time is: " + typeof expression
-        // );
+
         finalResult = solveExpression(expression);
         // Rounding off the answer obtained on performing the operation
         finalResult = parseFloat(finalResult.toFixed(9));
@@ -213,26 +199,17 @@ operatorButtons.forEach(function (operatorButton) {
         updateDisplay(firstNumber);
         upperDisplay.textContent = `${firstNumber} ${operatorValue}`;
         displayContent = "";
-
-        console.log("the final result is: " + finalResult);
-        console.log("the type of final result is: " + typeof finalResult);
       } else {
         firstNumber = displayContent;
         firstNumber = Number(firstNumber);
-        console.log(typeof firstNumber);
 
         displayContent = "";
-
-        // firstNumber = Number(firstNumber) + previousNumber;
       }
-      // firstNumber = Number(firstNumber);
+
       upperDisplay.textContent = `${firstNumber} ${operatorValue}`;
       operatorUsed = true;
     }
-    // console.log(firstNumber);
-    // updateDisplay(operatorValue);
   });
-  // Keyboard functionality for the operator buttons
 });
 
 document.addEventListener("keydown", function (event) {
@@ -263,7 +240,6 @@ compute.addEventListener("click", function () {
 
   //Applying toFixed function to the obtained answer
   ans = parseFloat(ans.toFixed(9));
-  console.log(typeof ans);
 
   lowerDisplay.textContent = ans;
   secondNumber = String(secondNumber);
@@ -301,7 +277,7 @@ const allClear = document.getElementById("all-clear");
 allClear.addEventListener("click", function () {
   displayContent = "";
   firstNumber = "";
-  console.log("The type of firstNumber now is: " + typeof firstNumber);
+
   secondNumber = "";
   operatorValue = "";
   ans = 0;
@@ -320,9 +296,6 @@ backspace.addEventListener("click", function () {
     if (stringLength > 0) {
       displayContent = displayContent.slice(0, stringLength - 1);
       lowerDisplay.textContent = displayContent;
-
-      console.log("the displayLength at this instance is: " + stringLength);
-      console.log("the displaySring at this instance is: " + displayContent);
     }
   }
 });

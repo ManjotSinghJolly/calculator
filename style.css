@@ -17,14 +17,7 @@ body {
   flex-direction: column;
 }
 
-/* #calculator-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 #calculator-body {
-  /* border: 1px solid black; */
   width: 350px;
   height: 550px;
 }
@@ -67,9 +60,6 @@ button {
   background-color: rgba(255, 255, 255, 0.75);
   width: 87.5px;
   height: 97.5px;
-
-  /* flex-grow: 1;
-  flex-basis: 0; */
 }
 
 button:hover {
