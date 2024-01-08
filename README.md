@@ -26,5 +26,5 @@ This is a simple calculator web application built using HTML, CSS, and JavaScrip
 
 1. Clone the repository to your local machine.
    ```bash
-   git clone https://github.com/your-username/calculator.git
+   git clone https://github.com/ManjotSinghJolly/calculator.git
    ```
